@@ -1,0 +1,73 @@
+[
+  {
+    "id": "PROD001",
+    "name": "iPhone 15 Pro",
+    "reference": "IPH15PRO",
+    "price": 1299.99,
+    "categoryId": 1
+  },
+  {
+    "id": "PROD002",
+    "name": "Samsung Galaxy S24",
+    "reference": "SGS24",
+    "price": 899.99,
+    "categoryId": 1
+  },
+  {
+    "id": "PROD003",
+    "name": "Nike Air Max",
+    "reference": "NIKEAM2024",
+    "price": 129.99,
+    "categoryId": 2
+  },
+  {
+    "id": "PROD004",
+    "name": "Adidas T-Shirt",
+    "reference": "ADIDTS001",
+    "price": 29.99,
+    "categoryId": 2
+  },
+  {
+    "id": "PROD005",
+    "name": "Coffee Beans Premium",
+    "reference": "COFFEE001",
+    "price": 24.99,
+    "categoryId": 3
+  },
+  {
+    "id": "PROD006",
+    "name": "Energy Drink Pack",
+    "reference": "ENERGY001",
+    "price": 12.99,
+    "categoryId": 3
+  },
+  {
+    "id": "PROD007",
+    "name": "Garden Tool Set",
+    "reference": "GARDEN001",
+    "price": 79.99,
+    "categoryId": 4
+  },
+  {
+    "id": "PROD008",
+    "name": "Yoga Mat Premium",
+    "reference": "YOGA001",
+    "price": 39.99,
+    "categoryId": 5
+  },
+  {
+    "id": "PROD009",
+    "name": "Face Cream",
+    "reference": "BEAUTY001",
+    "price": 49.99,
+    "categoryId": 6
+  },
+  {
+    "id": "PROD010",
+    "name": "Best Seller Book",
+    "reference": "BOOK001",
+    "price": 19.99,
+    "categoryId": 7
+  }
+]
+
