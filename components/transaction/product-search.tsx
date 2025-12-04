@@ -19,7 +19,8 @@ interface ProductSearchProps {
   showProductResults: boolean;
   setShowProductResults: (value: boolean) => void;
   filteredProducts: Product[];
-  onProductSelect: (product: Product) => void;
+  onProductSelect: (product: Product, quantity?: number) => void;
+  onEnterPress?: (searchValue: string) => void;
 }
 
 export default function ProductSearch({
@@ -29,6 +30,7 @@ export default function ProductSearch({
   setShowProductResults,
   filteredProducts,
   onProductSelect,
+  onEnterPress,
 }: ProductSearchProps) {
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +53,7 @@ export default function ProductSearch({
         <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
         <Input
           type="text"
-          placeholder="Search product by name or reference..."
+          placeholder="Search by product name..."
           value={productSearch}
           onChange={(e) => {
             setProductSearch(e.target.value);
@@ -62,6 +64,13 @@ export default function ProductSearch({
               setShowProductResults(true);
             }
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && onEnterPress) {
+              e.preventDefault();
+              onEnterPress(productSearch);
+            }
+          }}
+          autoFocus={false}
           className="pl-10 h-12 text-base"
         />
       </div>
@@ -76,12 +85,16 @@ export default function ProductSearch({
                 onClick={() => onProductSelect(product)}
                 className="w-full text-left p-3 hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-b-0 cursor-pointer"
               >
-                <div className="font-medium text-sm text-gray-900">{product.name}</div>
-                <div className="text-xs text-gray-500 mt-1">
-                  Ref: {product.reference} • {category?.name || "Unknown"}
-                </div>
-                <div className="text-sm font-medium text-blue-600 mt-1">
-                  {product.price.toFixed(2)} Dh
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="font-medium text-sm text-gray-900">{product.name}</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      {category?.name || "Unknown"}
+                    </div>
+                    <div className="text-sm font-medium text-blue-600 mt-1">
+                      {product.price.toFixed(2)} Dh
+                    </div>
+                  </div>
                 </div>
               </button>
             );

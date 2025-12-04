@@ -13,6 +13,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import productsData from "@/data/products.json";
 import { TransactionFormData, SubmissionState } from "./transaction/types";
+
+const getProducts = (): typeof productsData => {
+  if (typeof window === "undefined") return productsData;
+  try {
+    const saved = localStorage.getItem("products");
+    return saved ? JSON.parse(saved) : productsData;
+  } catch {
+    return productsData;
+  }
+};
 import { createEmptyItem, calculateTotal, saveToLocalStorage } from "./transaction/utils";
 import { validateField, validateItemField, validateForm } from "./transaction/validation";
 import SuccessToast from "./transaction/success-toast";
@@ -35,17 +45,15 @@ export default function CreateTransaction() {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [showSuccessToast, setShowSuccessToast] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [allProducts, setAllProducts] = useState(getProducts());
 
   const total = calculateTotal(formData.items);
 
   const filteredProducts = productSearch
-    ? productsData
-        .filter((product) => {
+    ? allProducts
+        .filter((product: typeof productsData[0]) => {
           const searchLower = productSearch.toLowerCase();
-          return (
-            product.name.toLowerCase().includes(searchLower) ||
-            product.reference.toLowerCase().includes(searchLower)
-          );
+          return product.name.toLowerCase().includes(searchLower);
         })
         .slice(0, 5)
     : [];
@@ -66,17 +74,17 @@ export default function CreateTransaction() {
     }
   };
 
-  const addProductFromSearch = (product: typeof productsData[0]) => {
+  const addProductToForm = (product: typeof productsData[0], quantity: number = 1) => {
     const emptyItemIndex = formData.items.findIndex(
       (item) => !item.productName && !item.reference && (item.price === "" || item.price === 0)
     );
 
     const productData = {
       productName: product.name,
-      reference: product.reference,
+      reference: "",
       price: product.price,
       categoryId: product.categoryId,
-      quantity: 1,
+      quantity: quantity,
     };
 
     if (emptyItemIndex !== -1) {
@@ -92,8 +100,28 @@ export default function CreateTransaction() {
         items: [...formData.items, { ...createEmptyItem(), ...productData }],
       });
     }
+  };
+
+  const addProductFromSearch = (product: typeof productsData[0], quantity: number = 1) => {
+    addProductToForm(product, quantity);
     setProductSearch("");
     setShowProductResults(false);
+  };
+
+
+  const handleSearchEnter = (searchValue: string) => {
+    const trimmedSearch = searchValue.trim();
+    if (!trimmedSearch) return;
+
+    const parts = trimmedSearch.split(/\s+/);
+    const possibleQuantity = parseInt(parts[parts.length - 1]);
+    const isQuantityValid = !isNaN(possibleQuantity) && possibleQuantity > 0;
+
+    const firstMatch = filteredProducts[0];
+    if (firstMatch) {
+      const quantity = isQuantityValid ? possibleQuantity : 1;
+      addProductFromSearch(firstMatch, quantity);
+    }
   };
 
   const updateItem = (id: string, field: keyof typeof formData.items[0], value: string | number | "") => {
@@ -290,7 +318,7 @@ export default function CreateTransaction() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-normal text-gray-900 flex items-center gap-2">
                   <FiShoppingCart className="w-5 h-5 text-blue-600" />
-                  Products
+                  Transaction Items
                 </h2>
               </div>
 
@@ -301,6 +329,7 @@ export default function CreateTransaction() {
                 setShowProductResults={setShowProductResults}
                 filteredProducts={filteredProducts}
                 onProductSelect={addProductFromSearch}
+                onEnterPress={handleSearchEnter}
               />
 
               <div className="space-y-3">
