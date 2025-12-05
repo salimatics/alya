@@ -2,7 +2,7 @@
 
 import { FiMinus } from "react-icons/fi";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import Dropdown from "@/components/ui/dropdown";
 import { TransactionItem } from "./types";
 import productCategories from "@/data/product-categories.json";
 
@@ -69,23 +69,20 @@ export default function ProductItem({
           <label className="block text-xs font-normal text-gray-700 mb-1">
             Category *
           </label>
-          <Select
+          <Dropdown
             value={item.categoryId}
-            onChange={(e) => {
-              const value = parseInt(e.target.value) || 0;
-              onUpdate(item.id, "categoryId", value);
-              onValidate(item.id, "categoryId", value);
+            onChange={(value) => {
+              const numValue = typeof value === "number" ? value : parseInt(value.toString()) || 0;
+              onUpdate(item.id, "categoryId", numValue);
+              onValidate(item.id, "categoryId", numValue);
             }}
-            className={`h-10 text-sm ${errors.categoryId ? "border-red-500" : ""}`}
-            required
-          >
-            <option value="0">Select category</option>
-            {productCategories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </Select>
+            options={productCategories.map((category) => ({
+              value: category.id,
+              label: category.name,
+            }))}
+            placeholder="Select category"
+            error={!!errors.categoryId}
+          />
           {errors.categoryId && (
             <p className="text-xs text-red-600 mt-1">{errors.categoryId}</p>
           )}
