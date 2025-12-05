@@ -28,7 +28,7 @@ export default function ProductItem({
   const subtotal = ((typeof item.price === "number" ? item.price : 0) * item.quantity).toFixed(2);
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 bg-white hover:border-blue-400 transition-all duration-200 fade-in slide-in-from-bottom-2">
+    <div className="border border-gray-300 rounded-lg p-4 bg-white fade-in slide-in-from-bottom-2">
       <div className="flex items-start justify-between mb-3">
         <span className="text-sm font-normal text-gray-500">#{index + 1}</span>
         {canRemove && (
