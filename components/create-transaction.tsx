@@ -306,7 +306,7 @@ export default function CreateTransaction() {
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-normal text-gray-900 flex items-center gap-2">
+                <h2 className="text-base font-normal text-gray-700 flex items-center gap-2">
                   <FiShoppingCart className="w-5 h-5 text-blue-600" />
                   Transaction Items
                 </h2>
