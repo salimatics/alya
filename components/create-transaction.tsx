@@ -13,17 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import productsData from "@/data/products.json";
 import { TransactionFormData, SubmissionState } from "./transaction/types";
-
-const getProducts = (): typeof productsData => {
-  if (typeof window === "undefined") return productsData;
-  try {
-    const saved = localStorage.getItem("products");
-    return saved ? JSON.parse(saved) : productsData;
-  } catch {
-    return productsData;
-  }
-};
-import { createEmptyItem, calculateTotal, saveToLocalStorage } from "./transaction/utils";
+import { createEmptyItem, calculateTotal, saveToLocalStorage, getProducts } from "./transaction/utils";
 import { validateField, validateItemField, validateForm } from "./transaction/validation";
 import SuccessToast from "./transaction/success-toast";
 import ProductSearch from "./transaction/product-search";
@@ -45,9 +35,9 @@ export default function CreateTransaction() {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [showSuccessToast, setShowSuccessToast] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
-  const [allProducts, setAllProducts] = useState(getProducts());
-
   const total = calculateTotal(formData.items);
+
+  const allProducts = getProducts();
 
   const filteredProducts = productSearch
     ? allProducts

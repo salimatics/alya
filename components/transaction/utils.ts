@@ -1,4 +1,15 @@
 import { TransactionItem } from "./types";
+import productsData from "@/data/products.json";
+
+export const getProducts = (): typeof productsData => {
+  if (typeof window === "undefined") return productsData;
+  try {
+    const saved = localStorage.getItem("products");
+    return saved ? JSON.parse(saved) : productsData;
+  } catch {
+    return productsData;
+  }
+};
 
 export const createEmptyItem = (): TransactionItem => ({
   id: crypto.randomUUID(),
