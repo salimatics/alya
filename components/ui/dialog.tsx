@@ -29,7 +29,7 @@ const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
     >
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
       <div
-        className="relative z-50 bg-white rounded-lg shadow-xl max-w-md w-full mx-4 fade-in zoom-in-95"
+        className="relative z-50 bg-white rounded-md shadow-xl max-w-md w-full mx-4 fade-in zoom-in-95"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

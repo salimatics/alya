@@ -28,14 +28,14 @@ export default function ProductItem({
   const subtotal = ((typeof item.price === "number" ? item.price : 0) * item.quantity).toFixed(2);
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 bg-white fade-in slide-in-from-bottom-2">
+    <div className="border border-gray-300 rounded-md p-4 bg-white fade-in slide-in-from-bottom-2">
       <div className="flex items-start justify-between mb-3">
         <span className="text-sm font-normal text-gray-500">#{index + 1}</span>
         {canRemove && (
           <button
             type="button"
             onClick={() => onRemove(item.id)}
-            className="flex items-center justify-center w-8 h-8 rounded-lg border border-gray-300 text-gray-600 hover:border-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-all duration-200 cursor-pointer"
+            className="flex items-center justify-center w-8 h-8 rounded-md border border-gray-300 text-gray-600 hover:border-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-all duration-200 cursor-pointer"
             aria-label="Remove product"
           >
             <FiMinus className="w-4 h-4" />

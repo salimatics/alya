@@ -243,7 +243,7 @@ export default function CreateTransaction() {
 
       <div className="max-w-5xl mx-auto">
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-white rounded-lg shadow-sm p-6 space-y-6">
+          <div className="bg-white rounded-md shadow-sm p-6 space-y-6">
             <div className="pb-4 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-normal text-gray-900">Create Transaction</h1>
@@ -359,7 +359,7 @@ export default function CreateTransaction() {
           </div>
 
           {submissionState === "error" && errorMessage && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 fade-in slide-in-from-top-2">
+            <div className="bg-red-50 border border-red-200 rounded-md p-4 fade-in slide-in-from-top-2">
               <div className="flex items-center gap-2">
                 <FiAlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <p className="text-red-800 font-normal">{errorMessage}</p>

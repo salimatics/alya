@@ -33,7 +33,7 @@ export default function ConfirmModal({
         </Dialog.Header>
 
         <div className="space-y-4">
-          <div className="bg-gray-50 rounded-lg p-4">
+          <div className="bg-gray-50 rounded-md p-4">
             <div className="space-y-2 text-center">
               <div>
                 <span className="text-sm font-medium text-gray-700">Customer Phone:</span>
@@ -49,7 +49,7 @@ export default function ConfirmModal({
                 const category = productCategories.find((cat) => cat.id === item.categoryId);
                 const itemTotal = (typeof item.price === "number" ? item.price : 0) * item.quantity;
                 return (
-                  <div key={item.id} className="border border-gray-200 rounded-lg p-3 bg-white">
+                  <div key={item.id} className="border border-gray-200 rounded-md p-3 bg-white">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-900">

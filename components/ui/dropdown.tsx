@@ -58,7 +58,7 @@ export default function Dropdown({
         type="button"
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`flex h-10 w-full items-center justify-between rounded-lg border-2 ${borderClass} bg-white px-4 py-2 text-sm text-gray-900 transition-all duration-200 focus-within:outline-none focus-within:ring-2 ${
+        className={`flex h-10 w-full items-center justify-between rounded-md border ${borderClass} bg-white px-4 py-2 text-sm text-gray-900 transition-all duration-200 focus-within:outline-none focus-within:ring-2 ${
           error ? "focus-within:ring-red-200" : "focus-within:ring-blue-200"
         } disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer`}
       >
@@ -73,7 +73,7 @@ export default function Dropdown({
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-full rounded-lg border border-gray-200 bg-white shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-50 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg max-h-60 overflow-auto">
           {options.length === 0 ? (
             <div className="px-4 py-2 text-sm text-gray-500">No options available</div>
           ) : (

@@ -13,7 +13,7 @@ export default function SuccessToast({ show, message, onClose }: SuccessToastPro
 
   return (
     <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-4">
-      <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4 shadow-lg fade-in slide-in-from-top-2">
+      <div className="bg-green-50 border border-green-200 rounded-md p-4 shadow-lg fade-in slide-in-from-top-2">
         <div className="flex items-center gap-3">
           <FiCheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
           <div className="flex-1">

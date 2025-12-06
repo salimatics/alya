@@ -75,7 +75,7 @@ export default function ProductSearch({
         />
       </div>
       {showProductResults && filteredProducts.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
           {filteredProducts.map((product) => {
             const category = productCategories.find((cat) => cat.id === product.categoryId);
             return (
